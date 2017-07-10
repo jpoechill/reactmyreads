@@ -44,10 +44,16 @@ class SearchBooks extends Component {
   }
 
   updateSearchResults() {
-    if (this.state.query.length >= 1) {
-      BooksAPI.search(this.state.query, 20).then((result) => {
-        if (Array.isArray(result)) {
-          this.setState({ books: result })
+    if (this.state.query.length >= 2) {
+      BooksAPI.search(this.state.query, 20).then((results) => {
+        if (results.length >= 1) {
+          results.map((result) => {
+            this.props.books.forEach((book) => {
+              if (book.id === result.id) { result.shelf = book.shelf }
+            })
+            return result
+          })
+          this.setState({ books: results })
         }
       })
     } else {
