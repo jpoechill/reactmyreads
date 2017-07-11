@@ -7,13 +7,6 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 class BooksApp extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.moveBook = this.moveBook.bind(this);
-    // this.isOnBookShelf = this.isOnBookShelf.bind(this);
-  }
-
   state = {
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -24,25 +17,25 @@ class BooksApp extends React.Component {
     books: [],
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
   }
 
-  updateBookShelf() {
+  updateBookShelf = () => {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
   }
 
-  addBook(book, shelf) {
+  addBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       this.updateBookShelf()
     })
   }
 
-  moveBook(bookID, shelf) {
+  moveBook = (bookID, shelf) => {
     BooksAPI.update(this.state.books.find(book => book.id === bookID), shelf).then(() => {
       this.updateBookShelf()
     })

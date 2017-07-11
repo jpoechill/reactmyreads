@@ -6,13 +6,7 @@ class MyReads extends Component {
     books: PropTypes.array.isRequired,
   }
 
-  constructor(props) {
-    super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
+  handleChange = (event) => {
     this.props.moveBook(event.target.name, event.target.value)
   }
 

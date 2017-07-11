@@ -4,12 +4,6 @@ import PropTypes from 'prop-types'
 import * as BooksAPI from '../BooksAPI'
 
 class SearchBooks extends Component {
-  constructor(props) {
-    super(props)
-
-    this.handleChange = this.handleChange.bind(this)
-  }
-
   state = {
     query: '',
     books: []
@@ -20,11 +14,13 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) => {
+    query = query.target.value
+    
     this.setState({ query: query })
     this.updateSearchResults()
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const book = event.target.name
     const shelf = event.target.value
 
@@ -32,7 +28,7 @@ class SearchBooks extends Component {
     this.updateBookShelf(book, shelf)
   }
 
-  updateBookShelf(bookID, shelf) {
+  updateBookShelf = (bookID, shelf) => {
     const books = this.state.books
 
     books.map(book => {
@@ -43,7 +39,7 @@ class SearchBooks extends Component {
     this.setState({books})
   }
 
-  updateSearchResults() {
+  updateSearchResults = () => {
     if (this.state.query.length >= 2) {
       BooksAPI.search(this.state.query, 20).then((results) => {
         if (results.length >= 1) {
@@ -76,7 +72,7 @@ class SearchBooks extends Component {
               type="text"
               placeholder="Search by title or author"
               value={query}
-              onChange={(event) => this.updateQuery(event.target.value)}
+              onChange={this.updateQuery}
             />
           </div>
         </div>
