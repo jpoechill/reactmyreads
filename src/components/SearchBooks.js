@@ -15,7 +15,7 @@ class SearchBooks extends Component {
 
   updateQuery = (query) => {
     query = query.target.value
-    
+
     this.setState({ query: query })
     this.updateSearchResults()
   }
@@ -58,8 +58,6 @@ class SearchBooks extends Component {
   }
 
   render() {
-    const { query } = this.state
-
     return (
       <div className="search-books">
         <div className="search-books-bar">
